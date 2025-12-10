@@ -14,6 +14,14 @@
       ></v-text-field>
     </template>
 
+    <v-select
+  clearable label="Select"
+  :items="category.data"
+  item-title="category_name"
+  item-value="id"
+  variant="outlined"
+></v-select>
+
     <v-data-table
       :headers="headers"
       :items="inventory.data"
@@ -25,10 +33,11 @@
   import { ref } from 'vue'
 
   const search = ref('')
-  const { data: inventory} = await useFetch('http://localhost:1337/api/inventories')
+  const { data: inventory } = await useFetch('http://localhost:1337/api/inventories?populate=category');
   const headers = [
+   
     { key: 'product_name', title: 'Product Name' },
-    { key: 'product_description', title: 'Product Description' },
+    { key: 'product_description', title: 'Description' },
     { key: 'quantity', title: 'Quantity' },
     { key: 'condition', title: 'Condition' },
     { key: 'location', title: 'Location' },
@@ -36,4 +45,5 @@
     { key: 'acquisition_cost', title: 'Aquisition Cost' },
     { key: 'total_cost', title: 'Total Cost' },
   ]
+
 </script>
