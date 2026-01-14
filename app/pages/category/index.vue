@@ -1,7 +1,9 @@
 <template>
+  <div>
   <v-card
     title="Category"
-    flat
+    rounded="50"
+    
   >
     <template v-slot:text>
       <v-text-field
@@ -16,25 +18,32 @@
 
     <v-data-table
       :headers="headers"
-      :items="categories.data"
+      :items="category.data"
       :search="search"
     ></v-data-table>
   </v-card>
+  </div>
 </template>
-
 
 <script setup>
   import { ref } from 'vue'
 
   const search = ref('')
-   const { data: categories } = await useFetch('http://localhost:1337/api/categories');
-  const headers = [
-    
-    
-    { key: 'category_name', title: 'Category Name' },
-    { key: 'description', title: 'Description' },
-    { key: 'createdAt', title: 'Date Created' },
   
-  ];
+  const { data: category} = await useFetch('http://localhost:1337/api/categories');
+
+  const headers = [
+  
+    { key: 'category_name', title: 'Category' },
+    { key: 'description', title: 'Description' },
+    { key: 'date_created', title: 'Date Created' },
+
+  ]
+
   
 </script>
+
+
+<style>
+
+</style>
